@@ -1,6 +1,7 @@
 function gameResult() {
     const currentGame = document.getElementById("gameResult");
     const currentGamePlayerThrow = document.getElementById("gamePlayerThrow");
+    const currentGameOpponentThrow = document.getElementById('gameOpponentThrow');
     const nextGamePlayerThrow = document.getElementById("playerThrow");
 
     // both players throw
@@ -25,29 +26,26 @@ function gameResult() {
         currentGame.className = "lose";
     }
 
-    // display the most recent choice and reset for another round
+    // display the most recent choices and reset for another round
     currentGamePlayerThrow.innerHTML = "Your current throw: " + currentPlayerThrow;
+    currentGameOpponentThrow.innerHTML = "Opponent throws: " + currentOpponentThrow;
     nextGamePlayerThrow.value = "";
 }
 
 function resultOpponentThrow() {
     // randomly generate a selection: 0, 1, 2
     let currentOpponentThrow = randomSelection();
-    let displayCurrentOpponentThrow = document.getElementById('gameOpponentThrow');
 
     // convert the random selection to a hand gesture and return the result
     switch (currentOpponentThrow) {
         case 0:
             currentOpponentThrow = 'Rock';
-            displayCurrentOpponentThrow.innerHTML = "Opponent throws: " + currentOpponentThrow;
             return currentOpponentThrow;
         case 1:
             currentOpponentThrow = 'Paper';
-            displayCurrentOpponentThrow.innerHTML = "Opponent throws: " + currentOpponentThrow;
             return currentOpponentThrow;
         case 2:
             currentOpponentThrow = 'Scissors';
-            displayCurrentOpponentThrow.innerHTML = "Opponent throws: " + currentOpponentThrow;
             return currentOpponentThrow;
     }
 }
