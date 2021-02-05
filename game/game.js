@@ -1,52 +1,52 @@
 function gameResult() {
-    const currentGame = document.getElementById("gameResult");
-    const currentGamePlayerThrow = document.getElementById("gamePlayerThrow");
-    const currentGameOpponentThrow = document.getElementById('gameOpponentThrow');
-    const nextGamePlayerThrow = document.getElementById("playerThrow");
+    const gameResult = document.getElementById("gameResult");
+    const gameResultPlayerThrow = document.getElementById("gamePlayerThrow");
+    const gameResultOpponentThrow = document.getElementById('gameOpponentThrow');
+    const playerNextThrow = document.getElementById("playerThrow");
 
     // both players throw
-    let currentPlayerThrow = document.getElementById('playerThrow').value;
-    let currentOpponentThrow = resultOpponentThrow();
+    let playerCurrentThrow = document.getElementById('playerThrow').value;
+    let opponentCurrentThrow = resultOpponentThrow();
 
     // compare handsigns and display the result of the game
-    if (currentPlayerThrow === currentOpponentThrow) {
-        currentGame.innerHTML = "DRAW! Both players selected " + currentPlayerThrow;
-        currentGame.className = "tie";
-    } else if (currentPlayerThrow === "Rock" && currentOpponentThrow === "Scissors") {
-        currentGame.innerHTML = "You WIN! " + currentPlayerThrow + " breaks " + currentOpponentThrow
-        currentGame.className = "win";
-    } else if (currentPlayerThrow === "Scissors" && currentOpponentThrow === "Paper") {
-        currentGame.innerHTML = "You WIN! " + currentPlayerThrow + " cuts " + currentOpponentThrow
-        currentGame.className = "win";
-    } else if (currentPlayerThrow === "Paper" && currentOpponentThrow === "Rock") {
-        currentGame.innerHTML = "You WIN! " + currentPlayerThrow + " covers " + currentOpponentThrow
-        currentGame.className = "win";
+    if (playerCurrentThrow === opponentCurrentThrow) {
+        gameResult.innerHTML = "DRAW! Both players selected " + playerCurrentThrow;
+        gameResult.className = "tie";
+    } else if (playerCurrentThrow === "Rock" && opponentCurrentThrow === "Scissors") {
+        gameResult.innerHTML = "You WIN! " + playerCurrentThrow + " breaks " + opponentCurrentThrow
+        gameResult.className = "win";
+    } else if (playerCurrentThrow === "Scissors" && opponentCurrentThrow === "Paper") {
+        gameResult.innerHTML = "You WIN! " + playerCurrentThrow + " cuts " + opponentCurrentThrow
+        gameResult.className = "win";
+    } else if (playerCurrentThrow === "Paper" && opponentCurrentThrow === "Rock") {
+        gameResult.innerHTML = "You WIN! " + playerCurrentThrow + " covers " + opponentCurrentThrow
+        gameResult.className = "win";
     } else {
-        currentGame.innerHTML = "You LOSE! " + currentOpponentThrow + " beats " + currentPlayerThrow
-        currentGame.className = "lose";
+        gameResult.innerHTML = "You LOSE! " + opponentCurrentThrow + " beats " + playerCurrentThrow
+        gameResult.className = "lose";
     }
 
     // display the most recent choices and reset for another round
-    currentGamePlayerThrow.innerHTML = "Your current throw: " + currentPlayerThrow;
-    currentGameOpponentThrow.innerHTML = "Opponent throws: " + currentOpponentThrow;
-    nextGamePlayerThrow.value = "";
+    gameResultPlayerThrow.innerHTML = "Your current throw: " + playerCurrentThrow;
+    gameResultOpponentThrow.innerHTML = "Opponent throws: " + opponentCurrentThrow;
+    playerNextThrow.value = "";
 }
 
 function resultOpponentThrow() {
     // randomly generate a selection: 0, 1, 2
-    let currentOpponentThrow = randomSelection();
+    let opponentCurrentThrow = randomSelection();
 
     // convert the random selection to a hand gesture and return the result
-    switch (currentOpponentThrow) {
+    switch (opponentCurrentThrow) {
         case 0:
-            currentOpponentThrow = 'Rock';
-            return currentOpponentThrow;
+            opponentCurrentThrow = 'Rock';
+            return opponentCurrentThrow;
         case 1:
-            currentOpponentThrow = 'Paper';
-            return currentOpponentThrow;
+            opponentCurrentThrow = 'Paper';
+            return opponentCurrentThrow;
         case 2:
-            currentOpponentThrow = 'Scissors';
-            return currentOpponentThrow;
+            opponentCurrentThrow = 'Scissors';
+            return opponentCurrentThrow;
     }
 }
 
