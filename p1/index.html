@@ -37,9 +37,10 @@
         </form>
 
         <h3>Outcome of the Game: </h3>
-        <div id="gamePlayerThrow"></div>
-        <div id="gameOpponentThrow"></div><br>
-        <div id="gameResult"></div>
+        <div>{{ displayGamePlayerThrow }}</div>
+        <div>{{ displayGameOpponentThrow }}</div>
+        <br>
+        <div :class="{ win: isWin, lose: isLoss}">{{ displayGameResult }}</div>
     </div>
 
 </body>

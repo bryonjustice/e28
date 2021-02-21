@@ -3,42 +3,47 @@ const Game = {
     data() {
         return {
             playerName: 'Bryon',
-            playerThrow: []
+            playerThrow: null,
+            displayGamePlayerThrow: null,
+            displayGameOpponentThrow: null,
+            displayGameResult: null,
+            isWin: false,
+            isLoss: false
         }
     },
     methods: {
         gameResult() {
-            const gameResult = document.getElementById("gameResult");
-            const gameResultPlayerThrow = document.getElementById("gamePlayerThrow");
-            const gameResultOpponentThrow = document.getElementById('gameOpponentThrow');
-            const playerNextThrow = document.getElementById("playerThrow");
-
             // both players throw
-            let playerCurrentThrow = document.getElementById('playerThrow').value;
+            let playerCurrentThrow = this.playerThrow;
             let opponentCurrentThrow = this.resultOpponentThrow();
 
             // compare handsigns and display the result of the game
             if (playerCurrentThrow === opponentCurrentThrow) {
-                gameResult.innerHTML = "DRAW! Both players selected " + playerCurrentThrow;
-                gameResult.className = "tie";
+                this.displayGameResult = "DRAW! Both players selected " + playerCurrentThrow;
+                this.isWin = false;
+                this.isLoss = false;
             } else if (playerCurrentThrow === "Rock" && opponentCurrentThrow === "Scissors") {
-                gameResult.innerHTML = "You WIN! " + playerCurrentThrow + " breaks " + opponentCurrentThrow
-                gameResult.className = "win";
+                this.displayGameResult = "You WIN! " + playerCurrentThrow + " breaks " + opponentCurrentThrow
+                this.isWin = true;
+                this.isLoss = false;
             } else if (playerCurrentThrow === "Scissors" && opponentCurrentThrow === "Paper") {
-                gameResult.innerHTML = "You WIN! " + playerCurrentThrow + " cuts " + opponentCurrentThrow
-                gameResult.className = "win";
+                this.displayGameResult = "You WIN! " + playerCurrentThrow + " cuts " + opponentCurrentThrow
+                this.isWin = true;
+                this.isLoss = false;
             } else if (playerCurrentThrow === "Paper" && opponentCurrentThrow === "Rock") {
-                gameResult.innerHTML = "You WIN! " + playerCurrentThrow + " covers " + opponentCurrentThrow
-                gameResult.className = "win";
+                this.displayGameResult = "You WIN! " + playerCurrentThrow + " covers " + opponentCurrentThrow
+                this.isWin = true;
+                this.isLoss = false;
             } else {
-                gameResult.innerHTML = "You LOSE! " + opponentCurrentThrow + " beats " + playerCurrentThrow
-                gameResult.className = "lose";
+                this.displayGameResult = "You LOSE! " + opponentCurrentThrow + " beats " + playerCurrentThrow
+                this.isWin = false;
+                this.isLoss = true;
             }
 
             // display the most recent choices and reset for another round
-            gameResultPlayerThrow.innerHTML = "Your current throw: " + playerCurrentThrow;
-            gameResultOpponentThrow.innerHTML = "Opponent throws: " + opponentCurrentThrow;
-            playerNextThrow.value = "";
+            this.displayGamePlayerThrow = "Your current throw: " + playerCurrentThrow;
+            this.displayGameOpponentThrow = "Opponent throws: " + opponentCurrentThrow;
+            this.playerThrow = "";
         },
         resultOpponentThrow() {
             // randomly generate a selection: 0, 1, 2
