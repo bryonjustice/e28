@@ -27,7 +27,7 @@
             <fieldset>
                 <legend>Play the next game: </legend>
                 <label for="playerThrow">Select your next throw:</label><br>
-                <select id="playerThrow" name="playerThrow">
+                <select id="playerThrow" name="playerThrow" v-model='playerThrow' v-on:change='gameResult'>
                     <option value="">- Make a selection -</option>
                     <option value="Rock">Rock</option>
                     <option value="Paper">Paper</option>
