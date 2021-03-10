@@ -1,48 +1,77 @@
 <!doctype html>
-<html lang='en'>
+<html lang="en">
 
 <head>
     <title>Game | Rock-Paper-Scissors</title>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <link href=data:, rel=icon>
 
-    <script src='https://unpkg.com/vue@next' defer></script>
-    <script src='script.js' defer></script>
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600&display=swap" rel="stylesheet">  
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <h1>Rock-Paper-Scissors</h1>
+    <div class="center material">
+        <div id='app' v-cloak>
+            <div v-if="!playerName">
+                <h1>ROCK-PAPER-SCISSORS</h1>
+                <h3>BY BRYON JUSTICE</h3>
+                <h4>DGMD E28 - Spring Semester</h4>
+                <div class="card material">
+                    <h2>welcome.</h2>
+                    <input type="text" placeholder="player name"></input><br/>
+                    <button>start</button>
+                </div>
+            </div>
 
-    <div id='app' v-cloak>
-        <p>Player name: {{ playerName }}</p>
-        <h3>Instructions: </h3>
-        <ol>
-            <li>Select your 'throw' choice from the drop down list below.</li>
-            <li>Your computer opponent will randomly throw a choice.</li>
-            <li>The outcome of the game will display below.</li>
-        </ol>
+            <div v-else>
+                <div class="card material">
+                    <h2>let's play.</h2>
+                    <label for="playerThrow">Select your next throw:</label><br>
+                    <select id="playerThrow" name="playerThrow" v-model='playerThrow' v-on:change='gameResult'>
+                        <option value="">- Make a selection -</option>
+                        <option value="Rock">Rock</option>
+                        <option value="Paper">Paper</option>
+                        <option value="Scissors">Scissors</option>
+                    </select>
+                    <div v-if="displayGameResult" class="fade-in">
+                        <div>
+                            <div class="mini left">{{playerName}}</div>
+                            <div class="mini left">versus</div>
+                            <div class="mini left">computer</div>
+                        </div>
+                        <div>
+                            <div class="mini left">
+                                <img src="./images/playerRock.png" class="right" :class="{ declined: isNotRock }">
+                                <img src="./images/playerPaper.png" class="right" :class="{ declined: isNotPaper }">
+                                <img src="./images/playerScissors.png" class="right" :class="{ declined: isNotScissors }">
+                            </div>
+                            <div class="mini left">
+                                <div :class="{ win: isWin, lose: isLoss, draw: isDraw, }">{{ displayGameResult }}</div>
+                            </div>
+                            <div class="mini left">
+                                <img src="./images/computerRock.png" class="left" :class="{ declined: opponentIsNotRock }">
+                                <img src="./images/computerPaper.png" class="left" :class="{ declined: opponentIsNotPaper }">
+                                <img src="./images/computerScissors.png" class="left" :class="{ declined: opponentIsNotScissors }">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <form>
-            <fieldset>
-                <legend>Play the next game: </legend>
-                <label for="playerThrow">Select your next throw:</label><br>
-                <select id="playerThrow" name="playerThrow" v-model='playerThrow' v-on:change='gameResult'>
-                    <option value="">- Make a selection -</option>
-                    <option value="Rock">Rock</option>
-                    <option value="Paper">Paper</option>
-                    <option value="Scissors">Scissors</option>
-                </select>
-            </fieldset>
-        </form>
-
-        <h3>Outcome of the Game: </h3>
-        <div>{{ displayGamePlayerThrow }}</div>
-        <div>{{ displayGameOpponentThrow }}</div>
-        <br>
-        <div :class="{ win: isWin, lose: isLoss }">{{ displayGameResult }}</div>
+                <!-- vue component -->
+                <div class="card material">
+                    <h2>
+                        <span class="player">&nbsp;{{ playerScore }}&nbsp;</span><img src="./images/player.png" class="score">
+                        <span class="console">score</span>
+                        <img src="./images/computer.png"  class="score"><span>{{ computerScore }}</span>
+                    </h2>
+                </div>
+            </div>
+        </div>
     </div>
-
 </body>
 
 </html>

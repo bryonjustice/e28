@@ -2,42 +2,81 @@
 const Game = {
     data() {
         return {
-            playerName: 'Bryon',
+            playerName: 'bryon',
             playerThrow: null,
             displayGamePlayerThrow: null,
             displayGameOpponentThrow: null,
             displayGameResult: null,
+            isNotRock: true,
+            isNotPaper: true,
+            isNotScissors: true,
+            opponentIsNotRock: true,
+            opponentIsNotPaper: true,
+            opponentIsNotScissors: true,
             isWin: false,
-            isLoss: false
+            isLoss: false,
+            isDraw: false,
+            playerScore: 0,
+            computerScore: 0,
         }
     },
     methods: {
         gameResult() {
+            // reset game status styling and hide all possible selections
+            this.isDraw = false;
+            this.isWin = false;
+            this.isLoss = false;
+
+            this.isNotRock = true;
+            this.isNotPaper = true;
+            this.isNotScissors = true;
+            this.opponentIsNotRock = true;
+            this.opponentIsNotPaper = true;
+            this.opponentIsNotScissors = true;
+
             // both players throw
             let playerCurrentThrow = this.playerThrow;
             let opponentCurrentThrow = this.resultOpponentThrow();
 
+            // show the player's throw
+            if (playerCurrentThrow == "Rock") {
+                this.isNotRock = false;
+            } else if (playerCurrentThrow == "Paper") {
+                this.isNotPaper = false;
+            } else {
+                this.isNotScissors = false;
+            }
+
+            // show the opponent's throw
+            if (opponentCurrentThrow == "Rock") {
+                this.opponentIsNotRock = false;
+            } else if (opponentCurrentThrow == "Paper") {
+                this.opponentIsNotPaper = false;
+            } else {
+                this.opponentIsNotScissors = false;
+            }
+
+
             // compare handsigns and display the result of the game
             if (playerCurrentThrow === opponentCurrentThrow) {
-                this.displayGameResult = "DRAW! Both players selected " + playerCurrentThrow;
-                this.isWin = false;
-                this.isLoss = false;
+                this.displayGameResult = "draw! "
+                this.isDraw = true;
             } else if (playerCurrentThrow === "Rock" && opponentCurrentThrow === "Scissors") {
-                this.displayGameResult = "You WIN! " + playerCurrentThrow + " breaks " + opponentCurrentThrow
+                this.displayGameResult = "you won! "
                 this.isWin = true;
-                this.isLoss = false;
+                this.playerScore = this.playerScore + 1;
             } else if (playerCurrentThrow === "Scissors" && opponentCurrentThrow === "Paper") {
-                this.displayGameResult = "You WIN! " + playerCurrentThrow + " cuts " + opponentCurrentThrow
+                this.displayGameResult = "you won! "
                 this.isWin = true;
-                this.isLoss = false;
+                this.playerScore = this.playerScore + 1;
             } else if (playerCurrentThrow === "Paper" && opponentCurrentThrow === "Rock") {
-                this.displayGameResult = "You WIN! " + playerCurrentThrow + " covers " + opponentCurrentThrow
+                this.displayGameResult = "you won! "
                 this.isWin = true;
-                this.isLoss = false;
+                this.playerScore = this.playerScore + 1;
             } else {
-                this.displayGameResult = "You LOSE! " + opponentCurrentThrow + " beats " + playerCurrentThrow
-                this.isWin = false;
+                this.displayGameResult = "you lost! "
                 this.isLoss = true;
+                this.computerScore = this.computerScore + 1;
             }
 
             // display the most recent choices and reset for another round
