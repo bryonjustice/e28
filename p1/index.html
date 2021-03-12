@@ -15,21 +15,22 @@
 
 <body>
     <div class="center material">
+        <!-- begin of root vue instance -->
         <div id='app' v-cloak>
-            <div v-if="!playerName">
+            <div v-if="!gameStarted">
                 <h1>ROCK-PAPER-SCISSORS</h1>
                 <h3>BY BRYON JUSTICE</h3>
                 <h4>DGMD E28 - Spring Semester</h4>
                 <div class="card material">
                     <h2>welcome.</h2>
-                    <input type="text" placeholder="player name"></input><br/>
-                    <button>start</button>
+                    <input type="text" placeholder="player name" v-model.lazy="playerName" v-on:keyup.enter="startGame"></input><br/>
+                    <button v-on:click="startGame">start</button>
                 </div>
             </div>
 
             <div v-else>
                 <div class="card material">
-                    <h2>let's play.</h2>
+                    <h2>hey {{ playerName }}, let's play.</h2>
                     <label for="playerThrow">Select your next throw:</label><br>
                     <select id="playerThrow" name="playerThrow" v-model='playerThrow' v-on:change='gameResult'>
                         <option value="">- Make a selection -</option>
@@ -37,7 +38,7 @@
                         <option value="Paper">Paper</option>
                         <option value="Scissors">Scissors</option>
                     </select>
-                    <div v-if="displayGameResult" class="fade-in">
+                    <div class="fade-in" v-if="displayGameResult">
                         <div>
                             <div class="mini left">{{playerName}}</div>
                             <div class="mini left">versus</div>
@@ -45,32 +46,60 @@
                         </div>
                         <div>
                             <div class="mini left">
-                                <img src="./images/playerRock.png" class="right" :class="{ declined: isNotRock }">
-                                <img src="./images/playerPaper.png" class="right" :class="{ declined: isNotPaper }">
-                                <img src="./images/playerScissors.png" class="right" :class="{ declined: isNotScissors }">
+                                <img src="./images/playerRock.png" class="right" v-bind:class="{ declined: isNotRock }">
+                                <img src="./images/playerPaper.png" class="right" v-bind:class="{ declined: isNotPaper }">
+                                <img src="./images/playerScissors.png" class="right" v-bind:class="{ declined: isNotScissors }">
                             </div>
                             <div class="mini left">
                                 <div :class="{ win: isWin, lose: isLoss, draw: isDraw, }">{{ displayGameResult }}</div>
                             </div>
                             <div class="mini left">
-                                <img src="./images/computerRock.png" class="left" :class="{ declined: opponentIsNotRock }">
-                                <img src="./images/computerPaper.png" class="left" :class="{ declined: opponentIsNotPaper }">
-                                <img src="./images/computerScissors.png" class="left" :class="{ declined: opponentIsNotScissors }">
+                                <img src="./images/computerRock.png" class="left" v-bind:class="{ declined: opponentIsNotRock }">
+                                <img src="./images/computerPaper.png" class="left" v-bind:class="{ declined: opponentIsNotPaper }">
+                                <img src="./images/computerScissors.png" class="left" v-bind:class="{ declined: opponentIsNotScissors }">
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- vue component -->
                 <div class="card material">
                     <h2>
-                        <span class="player">&nbsp;{{ playerScore }}&nbsp;</span><img src="./images/player.png" class="score">
+                        <span class="playerScore"> {{ playerScore }} </span>
+                        <img src="./images/player.png" class="score">
                         <span class="console">score</span>
-                        <img src="./images/computer.png"  class="score"><span>{{ computerScore }}</span>
+                        <img src="./images/computer.png"  class="score">
+                        <span class="computerScore"> {{ computerScore }} </span>
                     </h2>
+                    <h4>game history</h4>
+                    <!-- gameHistory component -->
+                    <game-history 
+                                v-for='game in games'
+                                v-bind:player-score='playerScore'
+                                v-bind:computer-score='computerScore'
+                                v-bind:result='game.result'
+                                v-bind:player-throw='game.playerThrow'
+                                v-bind:player-name='playerName'
+                                v-bind:computer-throw='game.computerThrow'
+                                v-bind:index='game.index'
+                                v-bind:date='game.date'
+                                v-bind:time='game.time'>
+                    </game-history>
+                    <!-- gameHistory component -->
+                    <button v-on:click="clearHistory">clear history</button>
                 </div>
             </div>
         </div>
+        <!-- end of root vue instance -->
+
+        <!-- begin template for game-history component -->
+        <script type='text/x-template' id='game-history'>
+                <p>
+                    <span class="event">
+                        {{ result }}...{{playerThrow}} ({{playerName}}) vs {{computerThrow}} (computer).
+                    </span><br />
+                    <span class="timestamp">recorded {{ index }} {{ date }} at {{ time }}</span> 
+                </p>
+        </script>
+        <!-- end template for game-history component -->
     </div>
 </body>
 
