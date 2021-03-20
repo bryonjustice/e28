@@ -5,13 +5,11 @@
 
 ## Outside resources
 
-- Free Vector Icons \*
+- Free Vector Icons
+  [flaticon.com](https://www.flaticon.com/)
 
-* [flaticon.com](https://www.flaticon.com/)
-
-- Vue.js \*
-
-* [v3.vuejs.org](https://v3.vuejs.org/guide/introduction.html)
+- Vue.js
+  [v3.vuejs.org](https://v3.vuejs.org/guide/introduction.html)
 
 ## Notes for instructor
 
