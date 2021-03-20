@@ -1,9 +1,18 @@
 # Project 1
-+ By: *Bryon Justice*
-+ Production URL: <http://e28p1.vueoftheyard.com>
+
+- By: _Bryon Justice_
+- Production URL: <http://e28p1.vueoftheyard.com>
 
 ## Outside resources
-*n/a*
+
+- Free Vector Icons \*
+
+* [flaticon.com](https://www.flaticon.com/)
+
+- Vue.js \*
+
+* [v3.vuejs.org](https://v3.vuejs.org/guide/introduction.html)
 
 ## Notes for instructor
-*n/a*
+
+_n/a_
