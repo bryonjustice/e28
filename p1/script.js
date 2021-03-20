@@ -102,8 +102,6 @@ const Game = {
                 time: gameTime,
             });
 
-            console.log(this.games)
-
             // reset for another round
             this.playerThrow = '';
         },
@@ -133,7 +131,6 @@ const Game = {
             this.computerScore = 0;
             // refresh the games 
             this.games = [];
-            console.log('clearing history');
         }
     }
 }
