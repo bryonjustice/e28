@@ -6,7 +6,7 @@
 ## Outside resources
 
 - Free Vector Icons: [flaticon.com](https://www.flaticon.com/)
-
+- Google Fonts - Quicksand: [fonts.google.com](https://fonts.google.com/specimen/Quicksand?preview.text_type=custom)
 - Vue.js: [v3.vuejs.org](https://v3.vuejs.org/guide/introduction.html)
 
 ## Notes for instructor
