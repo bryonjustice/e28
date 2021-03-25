@@ -12,6 +12,10 @@ button {
   width: 100px;
 }
 
+legend {
+  padding-top: 20px;
+}
+
 span {
   color: blue;
   font-size: 14pt;

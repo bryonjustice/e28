@@ -48,4 +48,25 @@ let WordScramble = {
     }
 }
 
-const app = Vue.createApp(WordScramble).mount('#app');
+const GameResult = {
+    name: 'GameResult',
+    props: {
+        correct: {
+            type: Boolean,
+            default: false,
+        },
+        incorrect: {
+            type: Boolean,
+        }
+    },
+    data() {
+        return {
+        }
+    },
+    methods: {
+        // placeholder
+    },
+    template: '#game-result',
+}
+
+const app = Vue.createApp(WordScramble).component('game-result',GameResult).mount('#app');

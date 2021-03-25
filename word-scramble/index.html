@@ -36,18 +36,23 @@
             </fieldset>
         </div>
 
-        <div v-if='gameResult' class='result' v-bind:class="{ correct: correct, incorrect: !correct }">
-            <fieldset>
-                <legend>GAME RESULT</legend>
-                <div v-if='correct'>WIN!
-                    <button v-on:click='newGame'>NEW GAME</button>
-                </div>
-                <div v-else>OOPS, TRY AGAIN. </div>
-            </fieldset>
+        <div v-if='gameResult' class='result'>
+            <game-result v-bind:correct='correct'
+                         v-bind:incorrect='incorrect'>
+            </game-result><br/><br/>
+            <button v-on:click='newGame'>NEW GAME</button>
         </div>
 
     </div>
-
+    <!-- begin template for game-result component -->
+    <script type='text/x-template' id='game-result'>
+        <fieldset v-bind:class="{ correct: correct, incorrect: !correct }">
+            <legend>GAME RESULT</legend>
+            <div v-if='correct'>WIN!</div>
+            <div v-else>OOPS, TRY AGAIN. </div>
+        </fieldset>
+    </script>
+    <!-- end template for game-result component -->
 </body>
 
 </html>
