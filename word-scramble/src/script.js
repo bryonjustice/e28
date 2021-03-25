@@ -1,3 +1,6 @@
+import { createApp } from 'vue'
+import GameResult from './components/GameResult.vue'
+
 let WordScramble = {
     data() {
         return {
@@ -48,26 +51,4 @@ let WordScramble = {
     }
 }
 
-const GameResult = {
-    name: 'GameResult',
-    props: {
-        correct: {
-            type: Boolean,
-            default: false,
-        },
-        incorrect: {
-            type: Boolean,
-            default: false,
-        }
-    },
-    data() {
-        return {
-        }
-    },
-    methods: {
-        // placeholder
-    },
-    template: '#game-result',
-}
-
-const app = Vue.createApp(WordScramble).component('game-result',GameResult).mount('#app');
+const app = createApp(WordScramble).component('game-result',GameResult).mount('#app');

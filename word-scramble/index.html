@@ -4,8 +4,7 @@
 <head>
     <title>Word Scramble</title>
     <meta charset='utf-8'>
-    <script src='https://unpkg.com/vue@next'></script>
-    <script src='script.js' defer></script>
+    <script src='js/app.js' defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -43,17 +42,6 @@
         </div>
 
     </div>
-    <!-- begin template for game-result component -->
-    <script type='text/x-template' id='game-result'>
-        <fieldset v-bind:class="{ correct: correct, incorrect: !correct }">
-            <legend>GAME RESULT</legend>
-            <div v-if='correct'>WIN!
-                <button v-on:click='$emit("new-game")'>NEW GAME</button>
-            </div>
-            <div v-else>OOPS, TRY AGAIN. </div>
-        </fieldset>
-    </script>
-    <!-- end template for game-result component -->
 </body>
 
 </html>

@@ -12,10 +12,6 @@ button {
   width: 100px;
 }
 
-legend {
-  padding-top: 20px;
-}
-
 span {
   color: blue;
   font-size: 14pt;
@@ -32,15 +28,4 @@ span {
   padding: 5px;
   margin: 10px 0;
   width: 100vw;
-}
-
-.correct {
-  background-color: green;
-  color: white;
-  padding: 20px;
-}
-
-.incorrect {
-  background-color: red;
-  color: white;
 }
