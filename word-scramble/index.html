@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang='en'>
+
+<head>
+    <title>Word Scramble</title>
+    <meta charset='utf-8'>
+    <script src='https://unpkg.com/vue@next'></script>
+    <script src='script.js' defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Word Scramble</h1>
+    <div id='app' v-cloak>
+
+        <div v-if='!gameStarted'>
+            <label for='name'>PLAYER NAME: </label>
+            <input type='text' id='name' v-model='player' v-on:keyup.enter='playGame'>
+            <button v-on:click='playGame'>START</button>
+        </div>
+
+        <div v-else>
+            <h3>PLAYER: {{ player.toUpperCase() }}</h3>
+            <fieldset>
+                <legend>WORD SCRAMBLE</legend>
+                <h2 class='scrambledWord'>{{ scrambledWord }}</h2>
+                <span>* CLUE... "{{ clue }}"</span>
+                <br/><br/>
+                <label for='guess'>ENTER YOUR GUESS: </label><br />
+                <input type='text' 
+                       id='guess' 
+                       v-on:keyup.enter='submitAnswer' 
+                       v-model.trim='guess'>
+                <button v-on:click='submitAnswer'>ANSWER</button>
+                <br /><br />
+            </fieldset>
+        </div>
+
+        <div v-if='gameResult' class='result' v-bind:class="{ correct: correct, incorrect: !correct }">
+            <fieldset>
+                <legend>GAME RESULT</legend>
+                <div v-if='correct'>WIN!
+                    <button v-on:click='newGame'>NEW GAME</button>
+                </div>
+                <div v-else>OOPS, TRY AGAIN. </div>
+            </fieldset>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
