@@ -37,10 +37,9 @@
         </div>
 
         <div v-if='gameResult' class='result'>
-            <game-result v-bind:correct='correct'
-                         v-bind:incorrect='incorrect'>
+            <game-result v-on:new-game='newGame($event)'
+                         v-bind:correct='correct'>
             </game-result><br/><br/>
-            <button v-on:click='newGame'>NEW GAME</button>
         </div>
 
     </div>
@@ -48,7 +47,9 @@
     <script type='text/x-template' id='game-result'>
         <fieldset v-bind:class="{ correct: correct, incorrect: !correct }">
             <legend>GAME RESULT</legend>
-            <div v-if='correct'>WIN!</div>
+            <div v-if='correct'>WIN!
+                <button v-on:click='$emit("new-game")'>NEW GAME</button>
+            </div>
             <div v-else>OOPS, TRY AGAIN. </div>
         </fieldset>
     </script>

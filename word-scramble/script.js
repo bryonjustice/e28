@@ -57,6 +57,7 @@ const GameResult = {
         },
         incorrect: {
             type: Boolean,
+            default: false,
         }
     },
     data() {
