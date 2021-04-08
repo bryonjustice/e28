@@ -15,11 +15,11 @@ import { products } from "@/common/products.js";
 export default {
     props: {
         category: {
-            type: String
+            type: String,
         },
     },
     data() {
-        return{
+        return {
             products: products,
         };
     },
@@ -30,7 +30,6 @@ export default {
             }, this.category);
         },
     },
-
 };
 </script>
 
