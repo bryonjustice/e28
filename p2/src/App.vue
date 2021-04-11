@@ -1,17 +1,6 @@
 <template>
   <div>
-    <nav>
-      <ul>
-        <li>
-          <router-link
-              v-for="link in links"
-              v-bind:key="link"
-              v-bind:to="paths[link]"
-          > {{ link }} 
-          </router-link>
-        </li>
-      </ul>
-    </nav>
+    <main-menu></main-menu>
     <router-view
       v-bind:posts="posts"
       v-on:update-posts="loadPosts">
@@ -21,17 +10,16 @@
 
 <script>
 import { axios } from "@/common/app.js";
+import MainMenu from "@/components/MainMenu.vue"; 
 
 export default {
   name: 'App',
+  components: {
+    "main-menu": MainMenu,
+  },
   data(){
     return{
       posts: [],
-      links: ['home', 'add a post'],
-      paths: {
-          home: '/',
-          'add a post': '/post/new',
-      },
     };
   },
   mounted(){
@@ -50,11 +38,8 @@ export default {
 <style src='@/assets/css/p2.css'></style>
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
