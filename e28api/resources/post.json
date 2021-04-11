@@ -1,0 +1,64 @@
+{
+    "permission_level": 0,
+    "fields": {
+        "title": {
+            "type": "string",
+            "validators": [
+                "required",
+                "min:3",
+                "max:100"
+            ]
+        },
+        "author": {
+            "type": "string",
+            "validators": [
+                "required",
+                "min:3",
+                "max:100"
+            ]
+        },
+        "published_date": {
+            "type": "string",
+            "validators": [
+                "required",
+                "min:10",
+                "max:10",
+                "unique",
+                "alpha_dash"
+            ]
+        },
+        "cover_blurb": {
+            "type": "string",
+            "validators": [
+                "required",
+                "min:3",
+                "max:100"
+            ]
+        },
+        "intro": {
+            "type": "string",
+            "validators": [
+                "required",
+                "min:3",
+                "max:100"
+            ]
+        },
+        "body": {
+            "type": "text",
+            "validators": [
+                "required",
+                "min:100"
+            ]
+        },
+        "image": {
+            "type": "string",
+            "validators": [
+                "required"
+            ]
+        },
+        "archive": {
+            "type": "boolean",
+            "validators": []
+        }
+    }
+}
