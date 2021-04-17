@@ -12,11 +12,17 @@
                 </li>
             </ul>
         </nav>
+        <show-banner></show-banner>
     </div>
 </template>
 
 <script>
+import ShowBanner from "@/components/ShowBanner.vue"
+
 export default {
+    components: {
+        "show-banner": ShowBanner,
+    },
     data(){
         return{
             links: ['HOME', 'ADD A POST'],

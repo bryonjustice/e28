@@ -40,7 +40,7 @@
             "validators": [
                 "required",
                 "min:3",
-                "max:100"
+                "max:300"
             ]
         },
         "body": {

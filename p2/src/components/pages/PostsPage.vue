@@ -3,8 +3,11 @@
         <router-link
             v-for="post in posts"
             v-bind:to="'/post/' + post.id"
-            v-bind:key="post.id">
-                <show-post v-bind:post="post" v-bind:reading="false"></show-post>
+            v-bind:key="post.id"
+        >
+            <show-post v-bind:post="post" 
+                       v-bind:reading="false"
+            ></show-post>
         </router-link>
     </div>
 </template>
@@ -21,7 +24,7 @@ export default {
             type: Array,
             default: null,
         },
-    }
+    },
 }
 </script>
 

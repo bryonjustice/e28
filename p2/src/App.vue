@@ -18,11 +18,11 @@ export default {
     "main-menu": MainMenu,
   },
   data(){
-    return{
+    return {
       posts: [],
     };
   },
-  mounted(){
+  mounted() {
     this.loadPosts();
   },
   methods: {
@@ -37,9 +37,10 @@ export default {
 
 <style src='@/assets/css/p2.css'></style>
 <style>
-#app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  #app {
+    margin: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
 }
 </style>

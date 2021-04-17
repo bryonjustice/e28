@@ -1,8 +1,7 @@
 <template>
   <div id='home-page'>
     <posts-page
-      v-bind:posts="posts"
-      v-on:update-posts="loadPosts">
+      v-bind:posts="posts">
     </posts-page>
   </div>
 </template>

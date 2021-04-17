@@ -1,18 +1,26 @@
 <template>
-    <div id="post-page">
-        <div>
+    <div id="post-page" v-cloak>
+        <div v-if="resourceNotFound" >
+            <show-error></show-error>
+        </div>
+
+        <div v-else-if="post">
             <show-post
                 v-bind:post="post"
-            ></show-post>
+                v-bind:reading="true"
+            >
+            </show-post>
         </div>
     </div>
 </template>
 
 <script>
 import ShowPost from "@/components/ShowPost.vue";
+import ShowError from "@/components/ShowError.vue";
 export default {
     components: {
         "show-post": ShowPost,
+        "show-error": ShowError,
     },
     props: {
         id: {
@@ -29,10 +37,15 @@ export default {
                 return post.id == this.id;
             }, this.id)[0];
         },
+        resourceNotFound() {
+            return this.post == null;
+        },
     },
 };
 </script>
 
 <style>
-
+    [v-cloak] {
+        display: none;
+    }
 </style>

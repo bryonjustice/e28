@@ -41,14 +41,14 @@ export default {
         reading: {
             type: Boolean,
             default: true,
-        }
+        },
     },
     computed: {
         imgSrc() {
             try {
                 return require("@/assets/images/" + this.post.image);
             } catch (e) {
-                return require("@/assets/images/louis.png");
+                return require("@/assets/images/404.png");
             }
         },
         aHref() {
@@ -100,7 +100,6 @@ export default {
         font-size: 140pt;
         margin: 200px 10px 0px 0px;
         text-align: right;
-
     }
 
     span.author {
