@@ -1,6 +1,6 @@
 <template>
     <div id="post-page" v-cloak>
-        <div v-if="resourceNotFound" >
+        <div v-if="resourceNotFound" v-cloak>
             <show-error></show-error>
         </div>
 

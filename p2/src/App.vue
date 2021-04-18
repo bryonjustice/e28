@@ -39,8 +39,8 @@ export default {
 <style>
   #app {
     margin: auto;
+    text-align: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
 }
 </style>

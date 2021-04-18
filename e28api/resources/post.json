@@ -23,7 +23,6 @@
                 "required",
                 "min:10",
                 "max:10",
-                "unique",
                 "alpha_dash"
             ]
         },
