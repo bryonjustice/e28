@@ -11,13 +11,15 @@
 
 ## SFC summary
 
+/components
+
 - BlogTeam.vue
 - MainMenu.vue
 - ShowBanner.vue
 - ShowError.vue
 - ShowPost.vue
 
-/pages/
+/components/pages/
 
 - HomePage.vue
 - PostAddPage.vue
@@ -33,7 +35,8 @@ _List the features in your application that are persisting and retrieving data f
 
 - `PostAddPage.vue` includes a method `addPost`<br/>
   HTTP Method: `POST` URL: `/post`<br/>
-  `prop` in PostPage.vue and PostsPage.vue
+
+  used as `prop` in PostPage.vue and PostsPage.vue
 
 ## Outside resources
 
