@@ -59,7 +59,7 @@ Code Source:\
   See page descriotion above.
 
 - PostsPage.vue\
-  Renders router link for each blog post mapping `v-for` directive to from the list of `post` alias elements from the `posts` source data array.
+  Renders router link for each blog post mapping `v-for` directive from the list of `post` alias elements in the `posts` source data array.
 
 ## Server interaction
 
