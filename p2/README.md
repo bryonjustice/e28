@@ -6,6 +6,7 @@
 ## Pages summary
 
 Domain: http://e28p2.vueoftheyard.com/
+
 for Vue Router set up reference: /src/main.js
 
 - HomePage (blog home page)\
