@@ -5,21 +5,49 @@
 
 ## Pages summary
 
-- Homepage w/ All Posts
-- Individual Post
-- Add a Post
+Domain: http://e28p2.vueoftheyard.com/
+
+- Homepage\
+  Introductory landing page includes site navigation, a listing of all active posts with abbreviated teaser details to encourage reader interest and an About section to briefly explain the blog purpose and fictional author.\
+  Home Page Navigation Path: '/'
+
+- Individual Post\
+  Long form read of individual post includes the full length blog and additional Next navigation for simple continued reading. Additionally, the page supports 404 type errors for resources that aren't found.\
+  Individual Navigation Path: '/post/id'
+
+- Add a Post\
+  Administrator form to add a new blog entry. The page includes a simple check box to autopopulate test data for simplified testing. The form includes client-side form validation for required fields and error display of both client-side and server-side errors.\
+  Add a Post path: '/post/new'
+
+Code Source:\
+/src/components/pages/
+
+- HomePage.vue
+- PostAddPage.vue
+- PostPage.vue
+- PostsPage.vue
 
 ## SFC summary
 
-/components
+/src/components
 
-- BlogTeam.vue
-- MainMenu.vue
-- ShowBanner.vue
+- BlogTeam.vue\
+  Renders About component to introduce the blog.\
+
+- MainMenu.vue\
+  Renders the primary site navigation component at the top of the page.\
+
+- ShowBanner.vue\
+  Renders the blog's banner component that appears at the top of the page.\
+
 - ShowError.vue
-- ShowPost.vue
+  Renders the user error message component when a post is not found.\
 
-/components/pages/
+- ShowPost.vue
+  Renders an individual post component. The component includes two modes.
+  The card mode offers a post summary for the homepage. The reading mode provides the long form post entry for the individual post page.
+
+/src/components/pages/
 
 - HomePage.vue
 - PostAddPage.vue
@@ -33,10 +61,12 @@ _List the features in your application that are persisting and retrieving data f
 - `App.vue` includes a method `loadPosts`<br/>
   HTTP Method: `GET` URL: `/post`
 
+  The `posts` array is passed as a `prop` in PostPage.vue and PostsPage.vue
+
 - `PostAddPage.vue` includes a method `addPost`<br/>
   HTTP Method: `POST` URL: `/post`<br/>
 
-  used as `prop` in PostPage.vue and PostsPage.vue
+  Additionally the component emits `updatePosts` upon successfully creating a new post to refresh components up the tree.
 
 ## Outside resources
 
