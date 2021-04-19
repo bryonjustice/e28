@@ -32,16 +32,16 @@ Code Source:\
 /src/components
 
 - BlogTeam.vue\
-  Renders About component to introduce the blog.\
+  Renders About component to introduce the blog.
 
 - MainMenu.vue\
-  Renders the primary site navigation component at the top of the page.\
+  Renders the primary site navigation component at the top of the page.
 
 - ShowBanner.vue\
-  Renders the blog's banner component that appears at the top of the page.\
+  Renders the blog's banner component that appears at the top of the page.
 
 - ShowError.vue
-  Renders the user error message component when a post is not found.\
+  Renders the user error message component when a post is not found.
 
 - ShowPost.vue
   Renders an individual post component. The component includes two modes.
@@ -49,22 +49,29 @@ Code Source:\
 
 /src/components/pages/
 
-- HomePage.vue
-- PostAddPage.vue
-- PostPage.vue
-- PostsPage.vue
+- HomePage.vue\
+  See page desciption above.
+
+- PostAddPage.vue\
+  See page description above.
+
+- PostPage.vue\
+  See page descriotion above.
+
+- PostsPage.vue\
+  Renders router link for each blog post mapping `v-for` directive to from the list of `post` alias elements from the `posts` source data array.
 
 ## Server interaction
 
-_List the features in your application that are persisting and retrieving data from the server_
+API: <http://e28api.vueoftheyard.com>
 
 - `App.vue` includes a method `loadPosts`<br/>
-  HTTP Method: `GET` URL: `/post`
+  API HTTP Method: `GET` URL: `/post`
 
   The `posts` array is passed as a `prop` in PostPage.vue and PostsPage.vue
 
 - `PostAddPage.vue` includes a method `addPost`<br/>
-  HTTP Method: `POST` URL: `/post`<br/>
+  API HTTP Method: `POST` URL: `/post`<br/>
 
   Additionally the component emits `updatePosts` upon successfully creating a new post to refresh components up the tree.
 
