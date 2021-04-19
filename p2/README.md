@@ -12,57 +12,56 @@ for Vue Router set up reference: /src/main.js
 - HomePage (blog home page)\
   Introductory landing page includes site navigation, a listing of all active posts with abbreviated teaser details to encourage reader interest and an About section to briefly explain the blog purpose and fictional author.\
 
-  Home page navigation path: '/'
+  Home page navigation path: `'/'`
 
 - PostPage (individual blog post)\
   Long form read of individual post includes the full length blog and additional Next navigation for simple continued reading. Additionally, the page supports 404 type errors for resources that aren't found.\
 
-  Individual blog post navigation path: '/post/:id'
+  Individual blog post navigation path: `'/post/:id'`
 
 - PostAddPage (add a new blog post)\
   Administrator form to add a new blog entry. The page includes a simple check box to autopopulate test data for simplified testing. The form includes client-side form validation for required fields and error display of both client-side and server-side errors.\
-  Add a new blog post navigation path: '/post/new'
+  Add a new blog post navigation path: `'/post/new'`
 
 Code Source:\
-/src/components/pages/
+`/src/components/pages/`
 
-- HomePage.vue
-- PostAddPage.vue
-- PostPage.vue
-- PostsPage.vue
+- `HomePage.vue`
+- `PostAddPage.vue`
+- `PostPage.vue`
 
 ## SFC summary
 
-/src/components
+`/src/components`
 
-- BlogTeam.vue\
+- `BlogTeam.vue`\
   Renders About component to introduce the blog.
 
-- MainMenu.vue\
+- `MainMenu.vue`\
   Renders the primary site navigation component at the top of the page.
 
-- ShowBanner.vue\
+- `ShowBanner.vue`\
   Renders the blog's banner component that appears at the top of the page.
 
-- ShowError.vue
+- `ShowError.vue`
   Renders the user error message component when a post is not found.
 
-- ShowPost.vue
+- `ShowPost.vue`
   Renders an individual post component. The component includes two modes.
   The card mode offers a post summary for the homepage. The reading mode provides the long form post entry for the individual post page.
 
-/src/components/pages/
+`/src/components/pages/`
 
-- HomePage.vue\
+- `HomePage.vue`\
   See page desciption above.
 
-- PostAddPage.vue\
+- `PostAddPage.vue`\
   See page description above.
 
-- PostPage.vue\
+- `PostPage.vue`\
   See page descriotion above.
 
-- PostsPage.vue\
+- `PostsPage.vue`\
   Renders router link for each blog post mapping `v-for` directive from the list of `post` alias elements in the `posts` source data array.
 
 ## Server interaction
