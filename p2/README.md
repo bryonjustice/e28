@@ -6,18 +6,21 @@
 ## Pages summary
 
 Domain: http://e28p2.vueoftheyard.com/
+for Vue Router set up reference: /src/main.js
 
-- Homepage\
+- HomePage (blog home page)\
   Introductory landing page includes site navigation, a listing of all active posts with abbreviated teaser details to encourage reader interest and an About section to briefly explain the blog purpose and fictional author.\
-  Home Page Navigation Path: '/'
 
-- Individual Post\
+  Home page navigation path: '/'
+
+- PostPage (individual blog post)\
   Long form read of individual post includes the full length blog and additional Next navigation for simple continued reading. Additionally, the page supports 404 type errors for resources that aren't found.\
-  Individual Navigation Path: '/post/id'
 
-- Add a Post\
+  Individual blog post navigation path: '/post/:id'
+
+- PostAddPage (add a new blog post)\
   Administrator form to add a new blog entry. The page includes a simple check box to autopopulate test data for simplified testing. The form includes client-side form validation for required fields and error display of both client-side and server-side errors.\
-  Add a Post path: '/post/new'
+  Add a new blog post navigation path: '/post/new'
 
 Code Source:\
 /src/components/pages/
