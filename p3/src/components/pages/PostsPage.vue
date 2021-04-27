@@ -19,11 +19,10 @@ export default {
     components: {
         "show-post": ShowPost,
     },
-    props: {
-        posts: {
-            type: Array,
-            default: null,
-        },
+    computed: {
+        posts() {
+            return this.$store.state.posts;
+        }
     },
 }
 </script>

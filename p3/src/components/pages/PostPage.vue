@@ -26,19 +26,16 @@ export default {
         id: {
             type: String,
         },
-        posts: {
-            type: Array,
-            default: null,
-        },
     },
     computed: {
         post() {
-            return this.posts.filter((post) => {
-                return post.id == this.id;
-            }, this.id)[0];
+            return this.$store.getters.getPostById(this.id);
         },
         resourceNotFound() {
             return this.post == null;
+        },
+        posts() {
+            return this.$store.state.posts;
         },
     },
 };

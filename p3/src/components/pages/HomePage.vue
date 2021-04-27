@@ -1,8 +1,6 @@
 <template>
   <div id='home-page'>
-    <posts-page
-      v-bind:posts="posts">
-    </posts-page>
+    <posts-page></posts-page>
     <blog-team></blog-team>
   </div>
 </template>
@@ -16,11 +14,10 @@ export default {
         "posts-page": PostsPage,
         "blog-team": BlogTeam,
     },
-    props: {
-        posts: {
-            type: Array,
-            default: null,
-        }
+    computed: {
+        posts() {
+            return this.$store.state.posts;
+        },
     },
 }
 </script>

@@ -1,15 +1,11 @@
 <template>
   <div>
     <main-menu></main-menu>
-    <router-view
-      v-bind:posts="posts"
-      v-on:update-posts="loadPosts">
-    </router-view>
+    <router-view v-on:update-posts="loadPosts"></router-view>
   </div>
 </template>
 
 <script>
-import { axios } from "@/common/app.js";
 import MainMenu from "@/components/MainMenu.vue"; 
 
 export default {
@@ -17,19 +13,17 @@ export default {
   components: {
     "main-menu": MainMenu,
   },
-  data(){
-    return {
-      posts: [],
-    };
+  computed: {
+    posts() {
+      return this.$store.state.posts;
+    },
   },
   mounted() {
     this.loadPosts();
   },
   methods: {
     loadPosts() {
-      axios.get("post").then(response => {
-        this.posts = response.data.post;
-      });
+      this.$store.dispatch("fetchPosts");
     },
   },
 }
