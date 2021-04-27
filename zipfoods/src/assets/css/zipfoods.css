@@ -23,6 +23,7 @@ VARIABLES
   --white: #ffffff;
   --silver: #dddddd;
   --gray: #aaaaaa;
+  --darkgray: #808080;
   --black: #111111;
 }
 
@@ -44,7 +45,7 @@ html {
   font-family: var(--sans-serif-font);
 
   /* Have the scroll bars always on so there's not a shift in the layout
-    when going from a non-scrolling page to a scrolling-page */
+  when going from a non-scrolling page to a scrolling-page */
   overflow-y: scroll;
 }
 
@@ -127,15 +128,21 @@ MISC
   margin: 5px;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
+/* 
+https://v3.vuejs.org/api/built-in-components.html#transition 
+https://v3.vuejs.org/guide/transitions-enterleave.html#transitioning-single-elements-components
+*/
 
-/* .fade-leave-active below version 2.1.8 */
-.fade-enter,
+/* Starting state */
+.fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+/* Active state */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
 }
 
 /*----------------------------------------------------
@@ -176,8 +183,8 @@ label.form-checkbox-label {
 }
 
 .form-help {
-  font-size: 1.4rem;
-  color: var(--gray);
+  font-size: 1.5rem;
+  color: var(--darkgray);
   margin-top: 5px;
 }
 
