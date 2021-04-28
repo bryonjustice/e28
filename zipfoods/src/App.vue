@@ -13,32 +13,37 @@
                         v-for="link in links"
                         v-bind:key="link"
                         v-bind:to="paths[link]"
+                        v-bind:data-test="'nav-link-' + link"
                     >
-                        <span v-if="link == 'cart'">({{ cartCount }})</span>
+                        <span v-if="link == 'cart'" data-test="cart-count"
+                            >({{ cartCount }})</span
+                        >
                         {{ link }}</router-link
                     >
                 </li>
             </ul>
         </nav>
 
-        <router-view
-            v-bind:products="products"
-            v-on:update-products="loadProducts"
-        ></router-view>
+        <router-view v-on:update-products="loadProducts"></router-view>
     </div>
 </template>
 
 <script>
-import { axios, cart } from "@/common/app.js";
+import { cart } from "@/common/app.js";
 
 export default {
     name: "App",
     data() {
         return {
-            products: [],
-
             /* Store links in an array to maintain order */
-            links: ["home", "products", "add a product", "categories", "account", "cart"],
+            links: [
+                "home",
+                "products",
+                "add a product",
+                "categories",
+                "account",
+                "cart",
+            ],
 
             /* Map links to  the appropriate component */
             paths: {
@@ -55,19 +60,20 @@ export default {
         cartCount() {
             return this.$store.state.cartCount;
         },
+        products() {
+            return this.$store.state.products;
+        },
     },
     mounted() {
         this.loadProducts();
 
         this.$store.commit("setCartCount", cart.count());
 
-        this.$store.dispatch('authUser');
+        this.$store.dispatch("authUser");
     },
     methods: {
         loadProducts() {
-            axios.get("product").then((response) => {
-                this.products = response.data.product;
-            });
+            this.$store.dispatch("fetchProducts");
         },
     },
 };

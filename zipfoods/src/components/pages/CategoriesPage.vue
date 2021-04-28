@@ -2,7 +2,11 @@
     <div id="categories-page">
         <h2>Categories</h2>
         <ul class="clean-list">
-            <li v-for="(category, id) in categories" v-bind:key="id">
+            <li
+                v-for="(category, id) in categories"
+                v-bind:key="id"
+                data-test="category-name"
+            >
                 {{ category }}
             </li>
         </ul>
@@ -11,12 +15,7 @@
 
 <script>
 export default {
-    props: {
-        products: {
-            type: Array,
-            default: null,
-        },
-    },
+    props: {},
     data() {
         return {};
     },
@@ -31,6 +30,9 @@ export default {
 
             // Return unique, sorted categories
             return [...new Set(mergedCategories)].sort();
+        },
+        products() {
+            return this.$store.state.products;
         },
     },
 };

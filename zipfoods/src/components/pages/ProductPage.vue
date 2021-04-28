@@ -13,10 +13,16 @@
                 v-bind:detailed="true"
             ></show-product>
 
-            <button v-on:click="addToCart">Add to cart</button>
+            <button v-on:click="addToCart" data-test="add-to-cart-button">
+                Add to cart
+            </button>
 
             <transition name="fade">
-                <div class="alert" v-if="addConfirmation">
+                <div
+                    class="alert"
+                    v-if="addConfirmation"
+                    data-test="add-to-cart-confirmation"
+                >
                     This product was added to your cart!
                 </div>
             </transition>
@@ -37,10 +43,6 @@ export default {
         id: {
             type: String,
         },
-        products: {
-            type: Array,
-            default: null,
-        },
     },
     data() {
         return {
@@ -49,12 +51,13 @@ export default {
     },
     computed: {
         product() {
-            return this.products.filter((product) => {
-                return product.id == this.id;
-            }, this.id)[0];
+            return this.$store.getters.getProductById(this.id);
         },
         productNotFound() {
             return this.product == null;
+        },
+        products() {
+            return this.$store.state.products;
         },
     },
     methods: {
