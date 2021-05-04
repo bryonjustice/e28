@@ -1,11 +1,11 @@
 # Project 2
 
 - By: ** Bryon Justice **
-- Production URL: <http://e28p2.vueoftheyard.com>
+- Production URL: <http://e28p3.vueoftheyard.com>
 
 ## Pages summary
 
-Domain: http://e28p2.vueoftheyard.com/
+Domain: http://e28p3.vueoftheyard.com/
 
 for Vue Router set up reference: /src/main.js
 
