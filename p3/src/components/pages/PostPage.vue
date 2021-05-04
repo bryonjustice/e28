@@ -29,6 +29,7 @@ export default {
     },
     computed: {
         post() {
+            console.log('here: ' + this.id );
             return this.$store.getters.getPostById(this.id);
         },
         resourceNotFound() {
