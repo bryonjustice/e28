@@ -50,33 +50,30 @@ const router = createRouter({
 // beforeEach executes code before a route is resolved
 router.beforeEach(async (to) => {
 
-    // Exact the meta information for the routes - notably to check if requiresAuth 
+    // Exact the meta information from the routes
+    // Notably check for requiresAuth
     const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
-    // Routing decision logic
-    const decide = () => {
-        if (requiresAuth && !store.state.user) {
-            console.log('should redirect to denied');
-            // If the visitor is trying to access a requiresAuth route 
-            // and the visitor has not logged in 
-            // then redirect the visitor to the denied page
+    // decision logic on routing
+    const decide = (user) => {
+        if (requiresAuth && !user) {
+            // Redirect vistor if they to access requiresAuth route without logging in.
             return '/denied';
-        }
-        else {
-            console.log('passing through user: ' + store.state.user);
+        } else {
+            // Open access or authorized user
             return true;
         }
     }
 
-    // If store does not have the user yet, dispatch the Vuex authUser action
+    // If the store user is null, dispatch the Vuex authUser action
     if (store.state.user === null) {
-        store.dispatch('authUser').then(() => {
-            decide();
-        });
+        let authUser = await store.dispatch('authUser');
+        if (authUser !== null) {
+            return decide(store.state.user);
+        }
     } else {
-        decide();
+        return decide(store.state.user);
     }
-
 });
 
 export { router };

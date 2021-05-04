@@ -25,10 +25,10 @@
         <div v-else id="loginForm" class="form">
             <h2>Login</h2>
             <label>Email:</label><br/>
-            <input type="text" v-model="data.email" /><br/>
+            <input type="text" id="email" v-model="data.email" /><br/>
 
             <label>Password:</label><br/>
-            <input type="password" v-model="data.password" />
+            <input type="password" id="password" v-model="data.password" />
 
             <button v-on:click="login">Login</button>
 

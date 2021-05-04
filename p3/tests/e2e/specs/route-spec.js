@@ -1,4 +1,4 @@
-describe('P3 Navigation', () => {
+describe('P3 Route', () => {
     const test = {
         homePath: '/',
         postPath: '/post/1',

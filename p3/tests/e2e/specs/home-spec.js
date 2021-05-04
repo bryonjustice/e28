@@ -29,7 +29,7 @@ describe('P3 Homepage', () => {
 
     it('checks About/Blog Team component displays', () => {
         cy.visit(test.homePath)
-        cy.wait(3000)
+        cy.get('h3', { timeout: 10000 }).should('be.visible');
         cy.contains('h3', 'ABOUT')
     })
 })
