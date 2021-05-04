@@ -13,7 +13,7 @@
                 your request again or, in lieu of this deadend, may we recommend that 
                 you read of Napoleon's own story of the events of 18 Brumaire, Year VIII.
                 <br/> <br/>
-                Try returning to the home page and looking another interesting read.<br/>
+                Try returning to the home page and enjoying an interesting read.<br/>
                 <br/>
                 <a href="/">RETURN HOME</a>
                 </div>
