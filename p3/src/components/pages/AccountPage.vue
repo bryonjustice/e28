@@ -32,16 +32,16 @@
 
             <button v-on:click="login">Login</button>
 
-            <div class="join">
-                INTERESTED IN CONTRIBUTING TO A "BONEY"FIDE BLOG?<br/><br/>
-                <a href="/register">[ REGISTER HERE ]</a>
-            </div>
-
             <ul v-if="errors">
                 <li class="error" v-for="(error, index) in errors" :key="index">
                     {{ error }}
                 </li>
             </ul>
+
+            <div class="join">
+                INTERESTED IN CONTRIBUTING TO A "BONEY"FIDE BLOG?<br/><br/>
+                <a href="/register">[ REGISTER HERE ]</a>
+            </div>
         </div>
     </div>
 </template>
@@ -53,8 +53,8 @@ export default {
     data() {
         return {
             data: {
-                email: "jill@harvard.edu",
-                password: "asdfasdf",
+                email: "",
+                password: "",
             },
             errors: null,
         };
