@@ -24,6 +24,8 @@ export default {
   methods: {
     loadPosts() {
       this.$store.dispatch("fetchPosts");
+
+      this.$store.dispatch("authUser");
     },
   },
 }

@@ -10,19 +10,30 @@ export const store = createStore({
     state() {
         return {
             posts: [],
+            user: null,
         }
     },
     mutations: {
         setPosts(state, payload) {
             state.posts = payload;
-        }
+        },
+        setUser(state, payload) {
+            state.user = payload;
+        },
     },
     actions: {
         fetchPosts(context){
             axios.get("post").then(response => {
                 context.commit('setPosts', response.data.post);
             });
-        }
+        },
+        authUser(context) {
+            axios.post('auth').then((response) => {
+                if (response.data.authenticated) {
+                    context.commit('setUser', response.data.user);
+                }
+            });
+        },
     },
     getters: {
         getPostById: (state) => (id) => {

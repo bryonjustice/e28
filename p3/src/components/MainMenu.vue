@@ -25,10 +25,11 @@ export default {
     },
     data(){
         return{
-            links: ['HOME', 'ADD A POST'],
+            links: ['HOME', 'ADD A POST', 'ACCOUNT'],
             paths: {
                 HOME: '/',
                 'ADD A POST': '/post/new',
+                ACCOUNT: '/account',
             },
         };
     },

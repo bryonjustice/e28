@@ -165,7 +165,6 @@ export default {
         },
         addPost() {
             if (!this.validationErrors.length) {
-                console.log('API: /post ');
                 axios.post('/post', this.post).then((response) => {
                     if (response.data.errors) {
                         this.validationErrors.push(response.data.errors);
