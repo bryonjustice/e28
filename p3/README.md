@@ -28,4 +28,4 @@
 
 ## E2E Testing screenshot
 
-![Project P3, A Boneyfide Blog, passing E2E tests](/src/assets/images/passing-tests.png)
+![Project P3, A Boneyfide Blog, passing E2E tests](https://raw.githubusercontent.com/bryonjustice/e28/blob/main/p3/src/assets/images/passing-tests.png)
