@@ -29,7 +29,7 @@ describe('P3 Post Add', () => {
         cy.visit(test.postNewPath)
         cy.get('button', { timeout: 10000 }).should('be.visible')
         cy.get('button').click()
-        cy.get('.validation', { timeout: 10000 }).should('be.visible')
+        cy.contains("The title field is required.");
         cy.wait(5000)
     })
 
@@ -71,6 +71,7 @@ describe('P3 Post Add', () => {
         cy.get('button').click()
         cy.contains('h2', 'Login')
         cy.visit(test.accountPath)
+        cy.wait(10000) // delay added to stabilize testing when running all cypress tests
     })
 
 })

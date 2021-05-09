@@ -25,7 +25,12 @@
                 id="name" 
                 required="required"
                 placeholder="Enter your first and last name"
+                v-on:blur="validate"
             /><br/>
+            <error-field
+                v-if="errors && 'name' in errors"
+                v-bind:errors="errors.name"
+            ></error-field>
 
             <label for="intro">EMAIL</label><br/>
             <input 
@@ -34,7 +39,12 @@
                 id="email"
                 required="required"
                 placeholder="Enter your email. [example: your.user@mail.com]"
+                v-on:blur="validate"
             /><br/>
+            <error-field
+                v-if="errors && 'email' in errors"
+                v-bind:errors="errors.email"
+            ></error-field>
 
             <label for="password">PASSWORD</label><br/>
             <input 
@@ -43,16 +53,13 @@
                 id="password" 
                 required="required"
                 placeholder="Enter a password that is eight (8) characters long."
+                v-on:blur="validate"
             /><br/>
+            <error-field
+                v-if="errors && 'password' in errors"
+                v-bind:errors="errors.password"
+            ></error-field>
 
-            <p class="validation" v-if="errors">
-                <b>** Oops. Please correct these items:</b>
-                <ul v-if="errors">
-                    <li class="error" v-for="(error, index) in errors" :key="index">
-                        {{ error }}
-                    </li>
-                </ul>
-            </p>
             <button v-on:click="registerUser()">REGISTER</button>
         </div>
     </div>
@@ -60,8 +67,13 @@
 
 <script>
 import { axios } from "@/common/app.js";
+import ErrorField from "@/components/ErrorField.vue";
+import Validator from "validatorjs";
 
 export default {
+    components: {
+        "error-field": ErrorField,
+    },
     data() {
         return {
             user: {
@@ -84,16 +96,33 @@ export default {
     },
     methods: {
         registerUser() {
-            axios.post('/register', this.user).then((response) => {
-                if (response.data.errors) {
-                    this.errors = response.data.errors;
-                    this.successfulRegistration = false;
-                } else {
-                    this.successfulRegistration = true; 
-                    this.errors = null;
-                    this.user = [];
-                }
+            if (this.validate()){
+                axios.post('/register', this.user).then((response) => {
+                    if (response.data.errors) {
+                        this.errors = response.data.errors;
+                        this.successfulRegistration = false;
+                    } else {
+                        this.successfulRegistration = true; 
+                        this.errors = null;
+                        this.user = [];
+                    }
+                });
+            }
+        },
+        validate() {
+            let validator = new Validator(this.user, {
+                name: "required",
+                email: "required|email",
+                password: "required|min:8",
             });
+
+            if (validator.fails()) {
+                this.errors = validator.errors.all();
+            } else {
+                this.errors = null;
+            }
+
+            return validator.passes();
         },
     },
 };

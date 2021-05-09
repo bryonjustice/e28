@@ -25,18 +25,28 @@
         <div v-else id="loginForm" class="form">
             <h2>Login</h2>
             <label>Email:</label><br/>
-            <input type="text" id="email" v-model="data.email" /><br/>
+            <input 
+                type="text" 
+                id="email" 
+                v-model="data.email" 
+                v-on:blur="validate"/><br/>
+            <error-field
+                v-if="errors && 'email' in errors"
+                v-bind:errors="errors.email"
+            ></error-field>
 
             <label>Password:</label><br/>
-            <input type="password" id="password" v-model="data.password" />
+            <input 
+                type="password" 
+                id="password" 
+                v-model="data.password" 
+                v-on:blur="validate"/>
+            <error-field
+                v-if="errors && 'password' in errors"
+                v-bind:errors="errors.password"
+            ></error-field>
 
             <button v-on:click="login">Login</button>
-
-            <ul v-if="errors">
-                <li class="error" v-for="(error, index) in errors" :key="index">
-                    {{ error }}
-                </li>
-            </ul>
 
             <div class="join">
                 INTERESTED IN CONTRIBUTING TO A "BONEY"FIDE BLOG?<br/><br/>
@@ -48,8 +58,13 @@
 
 <script>
 import { axios } from "@/common/app.js";
+import ErrorField from "@/components/ErrorField.vue";
+import Validator from "validatorjs";
 
 export default {
+    components: {
+        "error-field": ErrorField,
+    },
     data() {
         return {
             data: {
@@ -69,13 +84,15 @@ export default {
     },
     methods: {
         login() {
-            axios.post("login", this.data).then((response) => {
-                if (response.data.authenticated) {
-                    this.$store.commit("setUser", response.data.user);
-                } else {
-                    this.errors = response.data.errors;
-                }
-            });
+            if (this.validate()){
+                axios.post("login", this.data).then((response) => {
+                    if (response.data.authenticated) {
+                        this.$store.commit("setUser", response.data.user);
+                    } else {
+                        this.errors = response.data.errors;
+                    }
+                });
+            }
         },
         logout() {
             axios.post("logout").then((response) => {
@@ -83,6 +100,20 @@ export default {
                     this.$store.commit("setUser", null);
                 }
             });
+        },
+        validate() {
+            let validator = new Validator(this.data, {
+                email: "required|email",
+                password: "required|min:8",
+            });
+
+            if (validator.fails()) {
+                this.errors = validator.errors.all();
+            } else {
+                this.errors = null;
+            }
+
+            return validator.passes();
         },
     },
 };

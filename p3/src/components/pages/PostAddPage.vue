@@ -25,7 +25,12 @@
                 id="cover_blurb" 
                 required="required"
                 placeholder="Short title to appear on homepage [hint: 3-100 characters]"
+                v-on:blur="validate"
             /><br/>
+            <error-field
+                v-if="errors && 'cover_blurb' in errors"
+                v-bind:errors="errors.cover_blurb"
+            ></error-field>
 
             <label for="intro">INTRO</label><br/>
             <textarea 
@@ -34,8 +39,13 @@
                 id="intro"
                 required="required"
                 maxlength="300"
-                placeholder="1-2 sentences to appear on homepage to capture attention. [hint: 3-300 characters]">
+                placeholder="1-2 sentences to appear on homepage to capture attention. [hint: 3-300 characters]"
+                v-on:blur="validate">
             </textarea><br/>
+            <error-field
+                v-if="errors && 'intro' in errors"
+                v-bind:errors="errors.intro"
+            ></error-field>
 
             <label for="title">TITLE</label><br/>
             <input 
@@ -46,7 +56,12 @@
                 minlength="3"
                 maxlength="100"
                 placeholder="The main title for the blog post. [hint: 3-100 characters]"
+                v-on:blur="validate"
             /><br/>
+            <error-field
+                v-if="errors && 'title' in errors"
+                v-bind:errors="errors.title"
+            ></error-field>
 
             <label for="author">AUTHOR</label><br/>
             <input 
@@ -57,7 +72,12 @@
                 minlenth="3"
                 maxlength="100"
                 placeholder="The name of the blogger [hint: 3-100 characters]."
+                v-on:blur="validate"
             /><br/>
+            <error-field
+                v-if="errors && 'author' in errors"
+                v-bind:errors="errors.author"
+            ></error-field>
 
             <label for="published_date">PUBLISH DATE</label><br/>
             <input 
@@ -66,7 +86,12 @@
                 id="published_date" required="required"
                 maxlength="10"
                 placeholder="the date to appear for the blog [hint: format mm-dd-yyyy]"
+                v-on:blur="validate"
             /><br/>
+            <error-field
+                v-if="errors && 'published_date' in errors"
+                v-bind:errors="errors.published_date"
+            ></error-field>
 
             <label for="body">POST BODY</label><br/>
             <textarea 
@@ -75,11 +100,16 @@
                 id="body"
                 required="required"
                 minlength="100"
-                placeholder="Brief teaser to appear on homepage. [hint: minimum 100 characters]">
+                placeholder="Brief teaser to appear on homepage. [hint: minimum 100 characters]"
+                v-on:blur="validate">
             </textarea><br/>
+            <error-field
+                v-if="errors && 'body' in errors"
+                v-bind:errors="errors.body"
+            ></error-field>
 
             <label for="image">IMAGE</label><br/>
-            <select v-model="post.image" id="image" name="image">
+            <select v-model="post.image" id="image" name="image" v-on:blur="validate">
                 <option value="">Select an Image</option>
                 <option value="alps.png">Crossing the Alps 1805</option>
                 <option value="brumaire.png">Coup of 18 Brumaire by F. Bouchot</option>
@@ -88,31 +118,31 @@
                 <option value="crossing.png">Crossing the Alps 1850</option>
                 <option value="arcole.png">Pont d'Arcole</option>
             </select><br/>
+            <error-field
+                v-if="errors && 'image' in errors"
+                v-bind:errors="errors.image"
+            ></error-field>
 
-            <p class="validation" v-if="validationErrors.length">
-                <b>** Oops. Please correct these items before submitting:</b>
-                <ul>
-                    <li v-for="validationError in validationErrors" 
-                        v-bind:key="validationError.key">
-                        {{ validationError }}
-                    </li>
-                </ul>
-            </p>
             <input 
                 v-on:change="useTestData" 
                 v-model="checkedUseTestData"
                 type="checkbox" 
                 id="testData"
             /> Use Test Data
-            <button v-on:click="validateForm(), addPost()">ADD BLOG POST</button>
+            <button v-on:click="addPost()">ADD BLOG POST</button>
         </div>
     </div>
 </template>
 
 <script>
 import { axios } from "@/common/app.js";
+import ErrorField from "@/components/ErrorField.vue";
+import Validator from "validatorjs";
 
 export default {
+    components: {
+        "error-field": ErrorField,
+    },
     data() {
         return {
             post: {
@@ -164,7 +194,7 @@ export default {
             }
         },
         addPost() {
-            if (!this.validationErrors.length) {
+            if (this.validate()) {
                 axios.post('/post', this.post).then((response) => {
                     if (response.data.errors) {
                         this.validationErrors.push(response.data.errors);
@@ -179,36 +209,24 @@ export default {
                 });
             }
         },
-        validateForm: function() {
-            if (this.cover_blurb && this.intro && this.title && this.author && this.published_date && this.body && this.image) {
-                return true;
+        validate() {
+            let validator = new Validator(this.post, {
+                cover_blurb: "required|between:3,100",
+                intro: "required|between:3,300",
+                title: "required|between:3,100",
+                author: "required|between:3,100",
+                published_date: "required|alpha_dash|min:10|max:10",
+                body: "required|min:100",
+                image: "required",
+            });
+
+            if (validator.fails()) {
+                this.errors = validator.errors.all();
+            } else {
+                this.errors = null;
             }
 
-            this.validationErrors = [];
-
-            if (!this.post.cover_blurb) {
-                this.validationErrors.push('Cover Blurb is required.');
-            }
-
-            if (!this.post.intro) {
-                this.validationErrors.push('An intro is required.');
-            }
-
-            if (!this.post.title){
-                this.validationErrors.push('Title required.');
-            }
-
-            if (!this.post.author) {
-                this.validationErrors.push('An author is required.');
-            }
-
-            if (!this.post.published_date) {
-                this.validationErrors.push('A published date is required.');
-            }
-
-            if (!this.post.image) {
-                this.validationErrors.push('Select an image.');
-            }
+            return validator.passes();
         },
     },
 };

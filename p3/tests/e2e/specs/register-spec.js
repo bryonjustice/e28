@@ -15,7 +15,7 @@ describe('P3 Register', () => {
         cy.visit(test.registerPath)
         cy.get('button', { timeout: 10000 }).should('be.visible');
         cy.get('button').click()
-        cy.get('.validation', { timeout: 10000 }).should('be.visible');
+        cy.contains("The name field is required.");
     })
 
     it('visits the registration page and registers', () => {
